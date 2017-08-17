@@ -2,7 +2,7 @@
 {% load static from staticfiles %}
 
 {% block title %}Available Courses{% endblock %}
-{% block static %}<link rel="stylesheet" href="{% static '/courses/css/course.css.css' %}">{% endblock %}
+{% block static %}<link rel="stylesheet" href="{% static '/courses/css/course.css' %}">{% endblock %}
 {% block content %}
     <div class="cards">
         {% for course in courses %}
