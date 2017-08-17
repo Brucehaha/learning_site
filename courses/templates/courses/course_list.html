@@ -1,29 +1,26 @@
-{% extends "layout.html" %}
-{% load static from staticfiles %}
+{% extends "courses/layout.html" %}
 
-{% block title %}Available Courses{% endblock %}
-{% block static %}<link rel="stylesheet" href="{% static '/courses/css/course.css' %}">{% endblock %}
+{% block title %}All{% endblock %}
+
 {% block content %}
-    <div class="cards">
-        {% for course in courses %}
-            <div class="card">
-             <header><a href="{% url 'courses:detail' pk=course.pk %}">{{ course.title }}</a> </header>
-                <div class="card-copy">
-                    {% if course.description|wordcount <= 5 %}
-                        {{ course.description }}
-                    {% else %}
-                        {{ course.description|truncatewords:5 }}
-                        <a href="{% url 'courses:detail' pk=course.pk %}">Read more</a>
-
-                    {% endif %}
-                <div>Create at {{ course.create_at|date:"m/d/y" }}</div>
-
-                </div>
-
-            </div>
-        {% endfor %}
-
+    <div class="row columns">
+        {{ block.super }}
     </div>
-    <div>Have any questions? Contact Us! {{ email|urlize }}</div>
+    <div class="row">
+        {%  for course in courses %}
+            <div class="small-6 columns">
+                <div class="callout">
+                    <h5><a href="{% url 'courses:detail' pk=course.pk %}">{{ course.title }}</a></h5>
+                    <div class="card-copy">
+                        {{ course.description }}
+                    </div>
+                </div>
+            </div>
 
-{% endblock  %}
+            {% if forloop.counter|divisibleby:"2" %}
+                </div>
+                <div class="row">
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}
