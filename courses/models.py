@@ -18,7 +18,18 @@ class Step(models.Model):
 	course = models.ForeignKey(Course)
 	
 	class Meta:
+		abstract = True
 		ordering = ['order',]
 	
 	def __str__(self):
 		return self.title
+
+class Text(Step):
+	content = models.TextField(blank=True, default="")
+
+
+class Quiz(Step):
+    total_questions = models.IntegerField(default=4)
+
+    class Meta:
+        verbose_name_plural = "Quizzes"

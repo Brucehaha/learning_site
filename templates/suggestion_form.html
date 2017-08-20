@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block title %}Well hello there!{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <form action="" method="POST">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <input type="submit" value="Sumbit" class="button">
+        </form>
+    </div>
+{% endblock %}
